@@ -1,5 +1,5 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_slidable/src/auto_close_behavior.dart';
 import 'package:flutter_slidable/src/notifications_old.dart';
 
@@ -28,7 +28,11 @@ class Slidable extends StatefulWidget {
     this.dragStartBehavior = DragStartBehavior.down,
     this.useTextDirection = true,
     required this.child,
+    this.backgroundColor,
+    this.borderRadius,
   }) : super(key: key);
+  final Color? backgroundColor;
+  final BorderRadius? borderRadius;
 
   /// Whether this slidable is interactive.
   ///
@@ -239,6 +243,13 @@ class _SlidableState extends State<Slidable>
 
     content = Stack(
       children: <Widget>[
+        Positioned.fill(
+            child: Container(
+          decoration: BoxDecoration(
+            borderRadius: widget.borderRadius,
+            color: widget.backgroundColor,
+          ),
+        )),
         if (actionPane != null)
           Positioned.fill(
             child: ClipRect(
